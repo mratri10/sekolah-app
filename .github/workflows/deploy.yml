@@ -50,10 +50,10 @@ jobs:
             rm -f .env
 
             cat <<EOF > .env
-            
+
             APP_NAME=Sekolah
             APP_ENV=production
-            APP_KEY=base64:P09jMJQXVOdq9UUVXjWc5UziZXK6uSl+vLbvQMHxOCc=
+            APP_KEY=${{ secrets.APP_KEY }}
             APP_DEBUG=false
             APP_URL=http://167.99.76.27
 

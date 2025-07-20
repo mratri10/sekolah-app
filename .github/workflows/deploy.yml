@@ -52,10 +52,10 @@ jobs:
             cat <<EOF > .env
 
             APP_NAME=Sekolah
-            APP_ENV=production
+            APP_ENV=local
             APP_KEY=${{ secrets.APP_KEY }}
-            APP_DEBUG=false
-            APP_URL=http://167.99.76.27
+            APP_DEBUG=true
+            APP_URL=http://167.99.76.27:2808
 
             LOG_CHANNEL=stack
             LOG_DEPRECATIONS_CHANNEL=null

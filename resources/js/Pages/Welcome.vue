@@ -76,7 +76,7 @@ const subjects = [
                     <div class="flex flex-row flex-wrap justify-center gap-4 mb-6">
                         <div v-for="(score, index) in semester" :key="`top-${jndex}-${index}`">
                             <div
-                                class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-none transition hover:scale-105">
+                                class="p-6 bg-white min-w-[270px] dark:bg-gray-800 rounded-lg shadow-md dark:shadow-none transition hover:scale-105">
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                                     Juara {{ index + 1 }} - Total: {{ score.total_nilai }}
                                 </h3>
@@ -87,7 +87,8 @@ const subjects = [
                         </div>
                     </div>
                     <div class="overflow-x-auto overflow-y-hidden">
-                        <div class="flex flex-nowrap gap-4 min-w-full px-4">
+                        <div
+                            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 min-w-full px-4">
                             <div v-for="subject in subjects" :key="subject.key"
                                 class="flex flex-col items-center min-w-[270px] p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-none transition hover:scale-105">
                                 <h3 class="text-2xl font-semibold text-center text-gray-800 dark:text-white mb-3">

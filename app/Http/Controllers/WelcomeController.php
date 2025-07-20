@@ -27,7 +27,7 @@ class WelcomeController extends Controller
         $topTik = [];
         $topPrakarya = [];
 
-        for ($semester = 1; $semester <= 6; $semester++) {
+        for ($semester = 6; $semester >= 1; $semester--) {
             $topStudents[] = $this->getTopTotalNilai($semester, 3);
             $topPai[] = $this->getTopPai($semester, 2);
             $topPkn[] = $this->getTopPkn($semester, 2);

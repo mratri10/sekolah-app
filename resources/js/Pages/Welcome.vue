@@ -69,7 +69,7 @@ const subjects = [
             <div class="mt-16">
                 <div v-for="(semester, jndex) in semesters" :key="jndex" class="mb-10">
                     <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-6">
-                        Semester {{ jndex + 1 }}
+                        Semester {{ semesters.length - jndex }}
                     </h2>
 
                     <!-- Top Scores Section -->

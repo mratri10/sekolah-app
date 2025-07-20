@@ -68,7 +68,7 @@ class WelcomeController extends Controller
                 'su.name',
                 'n1.nisn',
                 'n1.semester',
-                DB::raw('(n1.pai + n1.pkn + n1.bindo + n1.matematika + n1.ipa + n1.ips + n1.bing + n1.pjok + n1.tik) as total_nilai')
+                DB::raw('(n1.pai + n1.pkn + n1.bindo + n1.matematika + n1.ipa + n1.ips + n1.bing + n1.pjok + n1.tik+n1.prakarya) as total_nilai')
             )
             ->where('n1.semester', $semester)
             ->orderByDesc('total_nilai')

@@ -16,7 +16,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          extensions: mbstring, bcmath, mysql
+          extensions: mbstring, bcmath, pdo, mysql
           tools: composer
 
       - name: Install Composer dependencies
@@ -35,6 +35,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "."
           target: "/var/www/sekolah-app"
+          strip_components: 1
 
       - name: SSH into server and run deploy commands
         uses: appleboy/ssh-action@master
@@ -44,7 +45,55 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /var/www/sekolah-app
-            cp .env.example .env
+
+            echo "Creating fresh .env file ..."
+            rm -f .env
+
+            cat <<EOF > .env
+            
+            APP_NAME=Sekolah
+            APP_ENV=production
+            APP_KEY=base64:P09jMJQXVOdq9UUVXjWc5UziZXK6uSl+vLbvQMHxOCc=
+            APP_DEBUG=false
+            APP_URL=http://167.99.76.27
+
+            LOG_CHANNEL=stack
+            LOG_DEPRECATIONS_CHANNEL=null
+            LOG_LEVEL=debug
+
+            DB_CONNECTION=mysql
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_PORT=${{ secrets.DB_PORT }}
+            DB_DATABASE=${{ secrets.DB_DATABASE }}
+            DB_USERNAME=${{ secrets.DB_USERNAME }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+
+            BROADCAST_DRIVER=log
+            CACHE_DRIVER=file
+            FILESYSTEM_DISK=local
+            QUEUE_CONNECTION=sync
+            SESSION_DRIVER=file
+            SESSION_LIFETIME=120
+
+            MEMCACHED_HOST=127.0.0.1
+
+            REDIS_HOST=127.0.0.1
+            REDIS_PASSWORD=null
+            REDIS_PORT=6379
+
+            MAIL_MAILER=smtp
+            MAIL_HOST=mailpit
+            MAIL_PORT=1025
+            MAIL_USERNAME=null
+            MAIL_PASSWORD=null
+            MAIL_ENCRYPTION=null
+            MAIL_FROM_ADDRESS="hello@example.com"
+            MAIL_FROM_NAME="Sekolah"
+
+            EOF
+
+            echo "Running Laravel setup commands..."
+            composer install --no-dev --optimize-autoloader
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache
